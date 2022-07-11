@@ -2,4 +2,6 @@
 
 // mapFile()
 
-import './datastructures/stack/index'
+// import './datastructures/stack/index'
+
+import './datastructures/queue/index'
