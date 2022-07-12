@@ -7,7 +7,7 @@ export default class StackArray<T> {
   }
 
   /**
-   * @description: 向栈添加元素
+   * @description 向栈添加元素
    * @function push
    * @param {T} element
    */
@@ -17,7 +17,7 @@ export default class StackArray<T> {
   }
 
   /**
-   * @description: 从栈移除元素
+   * @description 从栈移除元素
    * @function pop
    */
   pop() {
@@ -26,7 +26,7 @@ export default class StackArray<T> {
   }
 
   /**
-   * @description: 查看栈顶元素
+   * @description 查看栈顶元素
    * @function peek
    */
   peek() {
@@ -35,7 +35,7 @@ export default class StackArray<T> {
   }
 
   /**
-   * @description: 判断栈是否为空
+   * @description 判断栈是否为空
    * @function isEmpty
    */
   isEmpty() {
@@ -43,7 +43,7 @@ export default class StackArray<T> {
   }
 
   /**
-   * @description: 获取栈的长度
+   * @description 获取栈的长度
    * @function size
    */
   size() {
@@ -51,7 +51,7 @@ export default class StackArray<T> {
   }
 
   /**
-   * @description: 根据 后进先出 原则遍历
+   * @description 根据 后进先出 原则遍历
    * @returns
    */
   [Symbol.iterator]() {

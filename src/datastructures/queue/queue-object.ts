@@ -1,3 +1,4 @@
+// 使用对象实现队列
 export default class QueueObject<T> {
   private count: number // 记录队列的大小
   private lowestCount: number // 当前第一个元素
@@ -10,7 +11,7 @@ export default class QueueObject<T> {
   }
 
   /**
-   * @description: 向队列添加元素
+   * @description 向队列添加元素
    * @function enqueue
    * @param element 插入元素
    */
@@ -20,7 +21,7 @@ export default class QueueObject<T> {
   }
 
   /**
-   * @description: 从队列移除元素
+   * @description 从队列移除元素
    * @function dequeue
    * @returns
    */
@@ -36,7 +37,7 @@ export default class QueueObject<T> {
   }
 
   /**
-   * @description: 查看队列头元素
+   * @description 查看队列头元素
    * @function peek
    * @returns
    */
@@ -49,7 +50,7 @@ export default class QueueObject<T> {
   }
 
   /**
-   * @description: 检查队列是否为空
+   * @description 检查队列是否为空
    * @function isEmpty
    * @returns
    */
@@ -58,7 +59,7 @@ export default class QueueObject<T> {
   }
 
   /**
-   * @description: 获取队列长度
+   * @description 获取队列长度
    * @function size
    * @returns
    */
@@ -67,7 +68,7 @@ export default class QueueObject<T> {
   }
 
   /**
-   * @description: 清空队列
+   * @description 清空队列
    * @function clear
    */
   clear() {
@@ -77,7 +78,7 @@ export default class QueueObject<T> {
   }
 
   /**
-   * @description: 根据 先进先出 原则遍历
+   * @description 根据 先进先出 原则遍历
    * @returns
    */
   [Symbol.iterator]() {

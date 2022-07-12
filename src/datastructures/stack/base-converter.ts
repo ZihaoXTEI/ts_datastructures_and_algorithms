@@ -1,7 +1,7 @@
 import StackArray from './stack-array'
 
 /**
- * @description: 十进制转二进制算法
+ * @description 十进制转二进制算法
  * @function decimalToBinary
  * @param decNumber 被转换数
  * @returns
@@ -31,7 +31,7 @@ export function decimalToBinary(decNumber: number) {
 }
 
 /**
- * @description: 任意进制转换算法
+ * @description 任意进制转换算法
  * @function baseConverter
  * @param decNumber 被转换数
  * @param base 基数

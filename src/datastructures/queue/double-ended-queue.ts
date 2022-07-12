@@ -1,3 +1,4 @@
+// 使用对象实现双端队列
 export default class DoubleEndedQueue<T> {
   private count: number // 记录队列的大小
   private lowestCount: number // 当前第一个元素
@@ -10,7 +11,7 @@ export default class DoubleEndedQueue<T> {
   }
 
   /**
-   * @description: 向双端队列前端添加元素
+   * @description 向双端队列前端添加元素
    * @function addFront
    * @param element 插入元素
    */
@@ -30,7 +31,7 @@ export default class DoubleEndedQueue<T> {
   }
 
   /**
-   * @description: 向双端队列后端添加元素
+   * @description 向双端队列后端添加元素
    * @function addBack
    * @param element 插入元素
    */
@@ -40,7 +41,7 @@ export default class DoubleEndedQueue<T> {
   }
 
   /**
-   * @description: 从双端队列前端移除元素
+   * @description 从双端队列前端移除元素
    * @function removeFront
    * @returns
    */
@@ -56,7 +57,7 @@ export default class DoubleEndedQueue<T> {
   }
 
   /**
-   * @description: 从双端队列后端移除元素
+   * @description 从双端队列后端移除元素
    * @function removeBack
    * @returns
    */
@@ -72,7 +73,7 @@ export default class DoubleEndedQueue<T> {
   }
 
   /**
-   * @description: 查看双端队列前端第一个元素
+   * @description 查看双端队列前端第一个元素
    * @function peekFront
    * @returns
    */
@@ -85,7 +86,7 @@ export default class DoubleEndedQueue<T> {
   }
 
   /**
-   * @description: 查看双端队列后端第一个元素
+   * @description 查看双端队列后端第一个元素
    * @function peekBack
    * @returns
    */
@@ -98,7 +99,7 @@ export default class DoubleEndedQueue<T> {
   }
 
   /**
-   * @description: 检查队列是否为空
+   * @description 检查队列是否为空
    * @function isEmpty
    * @returns
    */
@@ -107,7 +108,7 @@ export default class DoubleEndedQueue<T> {
   }
 
   /**
-   * @description: 获取队列长度
+   * @description 获取队列长度
    * @function size
    * @returns
    */
@@ -116,7 +117,7 @@ export default class DoubleEndedQueue<T> {
   }
 
   /**
-   * @description: 清空队列
+   * @description 清空队列
    * @function clear
    */
   clear() {
@@ -126,7 +127,7 @@ export default class DoubleEndedQueue<T> {
   }
 
   /**
-   * @description: 根据 先进先出 原则遍历
+   * @description 根据 先进先出 原则遍历
    * @returns
    */
   [Symbol.iterator]() {
