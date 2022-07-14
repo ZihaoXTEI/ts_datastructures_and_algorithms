@@ -1,9 +1,11 @@
+import { Node } from './models/node'
 import { IEqualsFunction, defaultEquals } from '../../utils/utils'
 
+// 单向链表
 export default class LinkedList<T> {
-  private count: number // 链表数据总数
-  private head: Node<T> | undefined
-  private equalsFun: IEqualsFunction<T>
+  protected count: number // 链表数据总数
+  protected head: Node<T> | undefined
+  protected equalsFun: IEqualsFunction<T>
 
   constructor(equalsFun: IEqualsFunction<T> = defaultEquals) {
     this.count = 0
@@ -75,10 +77,11 @@ export default class LinkedList<T> {
 
     // 方式一：直接在原有节点替换数据
     /*     const node = this.getElementAt(index)
-    if(node){
+    if (node) {
       node.element = element
-    } */
-
+    }
+    return true
+ */
     // 方式二：删除原先节点，重新插入
     const result = this.removeAt(index)
     if (result) {
@@ -88,7 +91,7 @@ export default class LinkedList<T> {
   }
 
   /**
-   * @description 返回链表中特点位置的元素
+   * @description 返回链表中特定位置的元素
    * @function getElementAt
    * @param index 目标索引值
    * @returns
@@ -128,14 +131,14 @@ export default class LinkedList<T> {
   }
 
   /**
-   * @description 从链表的特点位置移除一个元素
+   * @description 从链表的特定位置移除一个元素
    * @function removeAt
    * @param index 移除元素的索引值
    * @returns
    */
   removeAt(index: number) {
     if (index < 0 || index > this.count) {
-      return null
+      return undefined
     }
 
     let current = this.head
@@ -212,21 +215,12 @@ export default class LinkedList<T> {
         if (index < this.count && currentNode) {
           const element = currentNode.element
           currentNode = currentNode.next
+          index++
           return { done: false, value: element }
         } else {
           return { done: true }
         }
       }
     }
-  }
-}
-
-class Node<T> {
-  public element: T
-  public next?: Node<T>
-
-  constructor(element: T, next?: Node<T>) {
-    this.element = element // 存储元素
-    this.next = next // 指向下一个元素
   }
 }
