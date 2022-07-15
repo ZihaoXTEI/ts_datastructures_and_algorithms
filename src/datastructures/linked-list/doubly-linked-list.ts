@@ -126,7 +126,7 @@ export default class DoublyLinkedList<T> extends LinkedList<T> {
       this.tail = this.tail?.prev
       this.tail.next = undefined
     } else {
-      currentNode = this.getElementAt(index - 1)
+      currentNode = this.getElementAt(index)
       const previousNode = currentNode?.prev
       if (previousNode && currentNode?.next?.prev) {
         previousNode.next = currentNode?.next
