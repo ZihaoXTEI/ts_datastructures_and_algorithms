@@ -170,6 +170,7 @@ class HashTableArray {
     return true
   }
 
+  // 哈希表迭代器
   [Symbol.iterator]() {
     let storageIndex = 0
     let bucketIndex = 0

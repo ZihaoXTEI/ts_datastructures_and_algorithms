@@ -20,3 +20,15 @@ export function defaultCompare<T>(a: T, b: T): number {
   }
   return a < b ? Compare.LESS_THAN : Compare.BIGGER_THAN
 }
+
+// 对传入参数转换成 字符串
+export function defaultToString(item: any): string {
+  if (item === null) {
+    return 'NULL'
+  } else if (item === undefined) {
+    return 'UNDEFINED'
+  } else if (typeof item === 'string' || item instanceof String) {
+    return `${item}`
+  }
+  return item.toString()
+}

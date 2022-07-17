@@ -1,8 +1,7 @@
 import { defaultToString } from '../../utils/utils'
 import { ValuePair } from './models/value-pair'
 
-// 普通哈希表（未解决冲突问题）
-export default class HashTable<K, V> {
+export default class HashTableLinearProbing<K, V> {
   protected table: { [key: string]: ValuePair<K, V> }
   protected toStringFn: (key: K) => string
 
@@ -33,7 +32,7 @@ export default class HashTable<K, V> {
    * @description 向哈希表中添加元素
    * @function put
    * @param key 键值
-   * @param value
+   * @param value 数据项
    * @returns
    */
   put(key: K, value: V) {
@@ -41,8 +40,16 @@ export default class HashTable<K, V> {
       return false
     }
 
-    const index = this.loseloseHashCode(key)
-    this.table[index] = new ValuePair(key, value)
+    let index = this.loseloseHashCode(key)
+    if (this.table[index] == null) {
+      this.table[index] = new ValuePair(key, value)
+    } else {
+      index++
+      while (this.table[index] != null) {
+        index++
+      }
+      this.table[index] = new ValuePair(key, value)
+    }
     return true
   }
 
@@ -53,9 +60,21 @@ export default class HashTable<K, V> {
    * @returns
    */
   get(key: K) {
-    const index = this.loseloseHashCode(key)
-    const valuePair = this.table[index]
-    return valuePair == null ? undefined : valuePair.value
+    let index = this.loseloseHashCode(key)
+
+    if (this.table[index].key === key) {
+      return this.table[index].value
+    } else {
+      index++
+      while (this.table[index] != null && this.table[index].key !== key) {
+        index++
+      }
+      if (this.table[index] != null && this.table[index].key === key) {
+        return this.table[index].value
+      }
+    }
+
+    return undefined
   }
 
   /**
@@ -65,14 +84,44 @@ export default class HashTable<K, V> {
    * @returns
    */
   remove(key: K) {
-    const index = this.loseloseHashCode(key)
-    const valuePair = this.table[index]
-    if (valuePair != null) {
-      delete this.table[index]
-      return true
+    let index = this.loseloseHashCode(key)
+
+    if (this.table[index] != null) {
+      if (this.table[index].key === key) {
+        delete this.table[index]
+        // 移动后边元素
+        this.verifyRemoveSideEffect(key, index)
+        return true
+      }
     }
 
     return false
+  }
+
+  /**
+   * @description 移动被删除元素后边的元素至空位
+   * @function verifyRemoveSideEffect
+   * @param key 被删除元素的键值
+   * @param removedPosition 被删除元素的在哈希表中的位置
+   */
+  private verifyRemoveSideEffect(key: K, removedPosition: number) {
+    const hash = this.loseloseHashCode(key)
+
+    let index = removedPosition + 1
+
+    while (this.table[index] != null) {
+      // 当前位置元素的 hash 值
+      const positionHash = this.loseloseHashCode(this.table[index].key)
+      // 如果当前元素的 hash 值 少于或等于 原始 hash 值，
+      // 或者当前元素的 hash 值 小于或等于 上一个被移除元素（removedPosition）的 hash 值
+      // 则需要将当前元素 移动 到 上一个被移除元素的位置（removedPosition）
+      if (positionHash <= hash || positionHash <= removedPosition) {
+        this.table[removedPosition] = this.table[index]
+        delete this.table[index]
+        removedPosition = index
+      }
+      index++
+    }
   }
 
   /**
@@ -111,7 +160,7 @@ export default class HashTable<K, V> {
   }
 
   /**
-   * @description 普通哈希表遍历
+   * @description 哈希表遍历
    * @returns
    */
   [Symbol.iterator]() {

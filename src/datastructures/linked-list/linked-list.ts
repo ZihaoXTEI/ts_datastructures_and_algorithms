@@ -171,7 +171,7 @@ export default class LinkedList<T> {
    * @function isEmpty
    * @returns
    */
-  isEmpty() {
+  isEmpty(): boolean {
     return this.count === 0
   }
 
@@ -180,7 +180,7 @@ export default class LinkedList<T> {
    * @function size
    * @returns
    */
-  size() {
+  size(): number {
     return this.count
   }
 

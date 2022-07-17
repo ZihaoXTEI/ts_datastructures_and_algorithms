@@ -8,4 +8,6 @@
 
 // import './datastructures/linked-list/index'
 
-import './datastructures/set/index'
+// import './datastructures/set/index'
+
+import './datastructures/dictionary and hash-table/index'
