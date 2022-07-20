@@ -103,6 +103,7 @@ export default class Dictionary<K, V> {
         return false
       }
     }
+    return true
   }
 
   /**

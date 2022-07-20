@@ -157,7 +157,7 @@ export default class HashTableSeparateChaining<K, V> {
     let currentNodeFlag: any = null
 
     return {
-      next: (): MyIterator<K, V> => {
+      next: (): MyIterator => {
         let currentValue: any = null
 
         let linkedList = this.table[keyList[index]]
@@ -191,7 +191,7 @@ export default class HashTableSeparateChaining<K, V> {
   }
 }
 
-interface MyIterator<K, V> {
+interface MyIterator {
   done: boolean
   value: any
 }

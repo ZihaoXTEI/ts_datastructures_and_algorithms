@@ -10,4 +10,6 @@
 
 // import './datastructures/set/index'
 
-import './datastructures/dictionary and hash-table/index'
+// import './datastructures/dictionary and hash-table/index'
+
+import './datastructures/tree/index'

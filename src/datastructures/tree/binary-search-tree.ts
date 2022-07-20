@@ -3,7 +3,7 @@ import { Compare, defaultCompare, ICompareFunction } from '../../utils/utils'
 
 export default class BinarySearchTree<T> {
   protected root: Node<T> | undefined
-  private compareFn: ICompareFunction<T>
+  protected compareFn: ICompareFunction<T>
 
   constructor(compareFn: ICompareFunction<T> = defaultCompare) {
     this.root = undefined
@@ -201,11 +201,13 @@ export default class BinarySearchTree<T> {
       node.right = this.removeNode(node.right, key)
       return node
     } else {
+      // 情况 1 ：移除一个叶节点
       if (node.left === null && node.right == null) {
         node = undefined
         return node
       }
 
+      // 情况 2 ：移除一个左侧或右侧子节点的节点
       if (node.left == null) {
         node = node.right
         return node
@@ -214,9 +216,13 @@ export default class BinarySearchTree<T> {
         return node
       }
 
-      const aux = this.minNode(node.right)
-      node.key = aux.key
-      node.right = this.removeNode(node.right, aux.key)
+      // 情况 3 ：移除有两个子节点的节点
+      // 寻找移除节点的右子树中最小节点
+      const successorNode = this.minNode(node.right)
+      // 利用该最小节点替换被移除节点的位置
+      // 只是赋值 和 修改右子树的指向
+      node.key = successorNode.key
+      node.right = this.removeNode(node.right, successorNode.key)
       return node
     }
   }

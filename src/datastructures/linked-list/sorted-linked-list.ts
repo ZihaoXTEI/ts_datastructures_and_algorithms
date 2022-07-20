@@ -1,4 +1,3 @@
-import { Node } from './models/node'
 import LinkedList from './linked-list'
 
 import {
