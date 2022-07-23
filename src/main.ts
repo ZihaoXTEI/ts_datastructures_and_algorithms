@@ -12,4 +12,6 @@
 
 // import './datastructures/dictionary and hash-table/index'
 
-import './datastructures/tree/index'
+// import './datastructures/tree/index'
+
+import './datastructures/graph/index'
