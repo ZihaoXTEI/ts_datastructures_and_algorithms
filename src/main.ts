@@ -14,4 +14,6 @@
 
 // import './datastructures/tree/index'
 
-import './datastructures/graph/index'
+// import './datastructures/graph/index'
+
+import './algorithms/sorting/index'

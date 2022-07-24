@@ -1,5 +1,11 @@
 import Graph from './graph'
-import { breadthFirstSearch } from './breadth-first-search'
+import {
+  breadthFirstSearch,
+  BFS,
+  formatShortestPath
+} from './breadth-first-search'
+import { dijkstra } from './dijkstra'
+import { floydWarshall } from './floyd-warshall'
 
 console.log('==========图结构==========')
 const graph = new Graph(false)
@@ -40,3 +46,25 @@ const handle = (v: any) => {
 console.log('广度优先搜索：')
 breadthFirstSearch(graph, handle)
 console.log(resultString)
+
+console.log('利用广度优先搜索寻找最短路径：')
+const fromVertex = graph.getVertices()[0]
+const shortestPathA = BFS(graph, fromVertex)
+console.log(shortestPathA)
+
+resultString = formatShortestPath(graph, graph.getVertices()[2])
+console.log(resultString)
+
+console.clear()
+
+const graphArray = [
+  [0, 2, 4, 0, 0, 0],
+  [0, 0, 2, 4, 2, 0],
+  [0, 0, 0, 0, 3, 0],
+  [0, 0, 0, 0, 0, 2],
+  [0, 0, 0, 3, 0, 2],
+  [0, 0, 0, 0, 0, 0]
+]
+
+dijkstra(graphArray, 0)
+floydWarshall(graphArray)

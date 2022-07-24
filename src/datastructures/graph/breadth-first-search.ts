@@ -1,5 +1,6 @@
 import Graph from './graph'
 import QueueObject from '../queue/queue-object'
+import StackArray from '../stack/stack-array'
 
 enum Colors {
   WHITE = 0,
@@ -63,7 +64,7 @@ export const breadthFirstSearch = (graph: Graph, callback: Function) => {
 }
 
 /**
- * @description 广度优先搜索（优化）
+ * @description 利用广度优先搜索寻找最短路径（一个顶点到另外一个顶点的最短路径）
  * @function BFS
  * @param graph 图
  * @param startVertex 开始顶点
@@ -74,10 +75,12 @@ export const BFS = (graph: Graph, startVertex: vertexType) => {
   const edgeList = graph.getEdgeList()
   const colors = initializeColor(vertexes)
   const queue = new QueueObject()
-  const distances: any = {}
-  const predecessors: any = {}
+  const distances: any = {} // 记录其它顶点至开始顶点的距离
+  const predecessors: any = {} // 记录前溯结点
+
   queue.enqueue(startVertex)
 
+  // 初始化
   vertexes.forEach((v) => {
     distances[v] = 0
     predecessors[v] = null
@@ -91,7 +94,9 @@ export const BFS = (graph: Graph, startVertex: vertexType) => {
     edges?.forEach((edge) => {
       if (colors[edge] === Colors.WHITE) {
         colors[edge] = Colors.GREY
+        // 通过 edge（指向当前顶点最近的一个顶点） + 1 来获取当前顶点与开始顶点的距离
         distances[edge] = distances[vertex] + 1
+        // 记录当前顶点的前溯顶点
         predecessors[edge] = vertex
         queue.enqueue(edge)
       }
@@ -104,4 +109,41 @@ export const BFS = (graph: Graph, startVertex: vertexType) => {
     distances,
     predecessors
   }
+}
+
+/**
+ * @description 格式化输出最短路径
+ * @function formatShortestPath
+ * @param garph 图
+ * @param startVertex 开始顶点
+ */
+export const formatShortestPath = (garph: Graph, startVertex: vertexType) => {
+  const predecessors = BFS(garph, startVertex).predecessors
+
+  const vertexes = garph.getVertices()
+  let resultString = ''
+
+  // 依次遍历每个顶点
+  for (let i = 0; i < vertexes.length; i++) {
+    const toVertex = vertexes[i]
+    // 使用栈结构记录路径值，最后通过出栈来获取路径
+    const path = new StackArray()
+
+    if (toVertex === startVertex) continue
+    // 依次遍历当前顶点的前溯顶点，将其入栈，直至遇到开始顶点
+    for (let v = toVertex; v !== startVertex; v = predecessors[v]) {
+      path.push(v)
+    }
+    // 将开始顶点入栈
+    path.push(startVertex)
+
+    // 通过出栈操作，输出路径格式： A - B - E
+    let s = path.pop()
+    while (!path.isEmpty()) {
+      s += ` - ${path.pop()}`
+    }
+
+    resultString += s + '\n'
+  }
+  return resultString
 }
