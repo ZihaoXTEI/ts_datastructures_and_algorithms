@@ -65,6 +65,89 @@ class ArrayList {
       this.array[j] = temp
     }
   }
+
+  // 希尔排序
+  shellSort() {
+    let { length } = this.array
+    let temp, j
+    // 初始化的增量
+    let gap = Math.floor(length / 2)
+
+    while (gap >= 1) {
+      // 以 gap 作为间隔进行分组，对分组进行插入排序
+      for (let i = gap; i < length; i++) {
+        temp = this.array[i]
+        j = i
+        // 对分组进行插入排序
+        while (j > gap - 1 && this.array[j - gap] > temp) {
+          this.array[j] = this.array[j - gap]
+          j -= gap
+        }
+        // 将 j 位置的元素赋值 temp
+        this.array[j] = temp
+      }
+
+      // 重新计算间隔
+      gap = Math.floor(gap / 2)
+    }
+  }
+
+  // 快速排序
+  quickSort() {
+    this._quickSortRec(0, this.array.length - 1)
+  }
+
+  _quickSortRec(left, right) {
+    // 结束条件
+    if (left >= right) {
+      return
+    }
+
+    // 获取枢纽
+    let pivot = this._median(left, right)
+
+    // 定义变量，记录当前找到位置
+    let i = left
+    let j = right - 1
+
+    while (i < j) {
+      while (this.array[++i] < pivot) {}
+      while (this.array[--j] > pivot) {}
+      if (i < j) {
+        this.swap(i, j)
+      } else {
+        break
+      }
+    }
+
+    this.swap(i, right - 1)
+
+    // 分而治之
+    this._quickSortRec(left, i - 1)
+    this._quickSortRec(i + 1, right)
+  }
+
+  // 中位数操作
+  _median(left, right) {
+    // 取出中间位置
+    let center = Math.floor((left + right) / 2)
+
+    // 判断大小进行交换
+    if (this.array[left] > this.array[center]) {
+      this.swap(left, center)
+    }
+    if (this.array[center] > this.array[right]) {
+      this.swap(center, right)
+    }
+    if (this.array[left] > this.array[center]) {
+      this.swap(left, center)
+    }
+
+    // 将 center 移到 right-1 的位置
+    this.swap(center, right - 1)
+
+    return this.array[right - 1]
+  }
 }
 
 const arrayList = new ArrayList()
@@ -84,3 +167,9 @@ console.log('原始数组：', arrayList.toString())
 
 // arrayList.insertionSort()
 // console.log('插入排序：', arrayList.toString())
+
+// arrayList.shellSort()
+// console.log('希尔排序：', arrayList.toString())
+
+arrayList.quickSort()
+console.log('快速排序：', arrayList.toString())
